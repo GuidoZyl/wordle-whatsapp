@@ -61,12 +61,27 @@ def recibir_palabra():
             es_valida = True
     return palabra
 
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+RESET = "\033[0m"
+
 def juego():
     with open("palabras_esp.csv") as archivo:
         correcta = random.choice(archivo.readlines()).strip("\n")
     intentos = []
     while len(intentos) < 6:
         palabra_usr = recibir_palabra()
-        print(chequear_palabra(palabra_usr, correcta))
+        intento = chequear_palabra(palabra_usr, correcta)
+        intentos.append(intento)
+        if __name__ == '__main__': # Para jugar en consola
+            intento_a_mostrar = ""
+            for letra in intento:
+                if letra[1] == 2:
+                    intento_a_mostrar += f"{GREEN}{letra[0].upper()}{RESET}"
+                elif letra[1] == 1:
+                    intento_a_mostrar += f"{YELLOW}{letra[0].upper()}{RESET}"
+                else:
+                    intento_a_mostrar += letra[0].upper()
+            print(intento_a_mostrar)
 
 juego()
