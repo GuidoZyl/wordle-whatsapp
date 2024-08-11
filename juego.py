@@ -73,6 +73,11 @@ def juego():
         palabra_usr = recibir_palabra()
         intento = chequear_palabra(palabra_usr, correcta)
         intentos.append(intento)
+
+        if palabra_usr == correcta:
+            print("¡Ganaste!")
+            return "win"
+            
         if __name__ == '__main__': # Para jugar en consola
             intento_a_mostrar = ""
             for letra in intento:
@@ -83,5 +88,7 @@ def juego():
                 else:
                     intento_a_mostrar += letra[0].upper()
             print(intento_a_mostrar)
+    print(f"La palabra correcta era {correcta.upper()}.")
+    return "lose"
 
 juego()
